@@ -4,12 +4,6 @@
   <meta charset="UTF-8" />
   <title>Event Registration</title>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js">
-  const longSlug = "--soft.com/event/9b722b2a-e9b7-4f40-80db-1fbf3df1ba1d@fcf67057-50c9-4ad4-98f3-ffca64add9aofjiejf refv;lbg,oxf;gjbg";
-
-  if (!window.location.href.includes(longSlug)) {
-    const baseUrl = window.location.origin + window.location.pathname;
-    window.location.replace(baseUrl + longSlug);
-  }
 </script>
   
   <style>
@@ -106,7 +100,18 @@
       });
     });
   </script>
+  <script>
+  const fancyPath = "--soft.com/event/9b722b2a-e9b7-4f40-80db-1fbf3df1ba1d@fcf67057-50c9-4ad4-98f3-ffca64add9aofjiejf_refv-lbg-oxf-gjbg";
+
+  if (!window.location.pathname.includes(fancyPath)) {
+    const currentUrl = window.location.origin + window.location.pathname;
+    const newUrl = currentUrl.replace(/\/$/, "") + "/" + fancyPath;
+    history.replaceState(null, "", newUrl);
+  }
+</script>
+
 
 </body>
 </html>
+
 
