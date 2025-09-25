@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Secure Payroll Verification</title>
+  <meta charset="UTF-8" />
+  <title>Event Registration</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,11 +15,11 @@
       background: white;
       padding: 30px;
       max-width: 500px;
-      margin: auto;
+      margin: auto; 
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    h2, h3 {
+    h2 {
       text-align: center;
       color: #2E3A59;
     }
@@ -26,16 +27,17 @@
       display: block;
       margin-top: 15px;
     }
-    input, select, textarea {
+    input, select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 16px;
     }
     button {
       margin-top: 20px;
-      padding: 10px;
+      padding: 12px;
       width: 100%;
       background-color: #0078D7;
       color: white;
@@ -47,69 +49,55 @@
     button:hover {
       background-color: #005a9e;
     }
-    .logo {
-      display: block;
-      margin: 0 auto 20px auto;
-      width: 120px;
-    }
-    .hidden {
-      display: none;
-    }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Logo_HR.svg/1024px-Logo_HR.svg.png" alt="Company Logo" class="logo">
-    <h2>Secure Payroll Verification</h2>
-    <form id="phishingForm">
-      <label for="email">Company Email Address</label>
-      <input type="email" id="email" name="email" placeholder="you@company.com" required>
+    <h2>Register for an Event</h2>
+    <form id="regForm">
+      <label for="userEmail">Your Email Address</label>
+      <input type="email" id="userEmail" name="user_email" placeholder="you@example.com" required>
 
-      <label for="dob">Date of Birth</label>
-      <input type="text" id="dob" name="dob" placeholder="DD/MM/YYYY" required>
+      <label for="eventSelect">Select Event</label>
+      <select id="eventSelect" name="event_name" required>
+        <option value="" disabled selected>Select an event</option>
+        <option value="Event 1 - September 2025">Event 1 - September 2025</option>
+        <option value="Event 2 - October 2025">Event 2 - October 2025</option>
+        <option value="Event 3 - November 2025">Event 3 - November 2025</option>
+      </select>
 
-      <label for="employeeID">Employee ID</label>
-      <input type="text" id="employeeID" name="employeeID" required>
-
-      <button type="submit">Verify</button>
+      <button type="submit">Register</button>
     </form>
-
-    <div id="quizSection" class="hidden">
-      <h3>Phishing Awareness Quiz</h3>
-      <form id="quizForm">
-        <label>1. What made this email suspicious?</label>
-        <input type="text" name="question1" required>
-
-        <label>2. What would you do next time?</label>
-        <textarea name="question2" rows="3" required></textarea>
-
-        <label>3. How confident are you in spotting phishing emails?</label>
-        <select name="confidence">
-          <option>Very Confident</option>
-          <option>Somewhat Confident</option>
-          <option>Not Confident</option>
-        </select>
-
-        <button type="submit">Submit Feedback</button>
-      </form>
-    </div>
   </div>
 
   <script>
-    const form = document.getElementById("phishingForm");
-    const quizSection = document.getElementById("quizSection");
+    // Initialize EmailJS with your Public Key
+    emailjs.init("IVp3wf7nqiwegTYkJ"); // <-- Replace this with your actual public key
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("This was a phishing simulation. No data has been collected.");
-      form.classList.add("hidden");
-      quizSection.classList.remove("hidden");
-    });
+    // Handle form submission
+    document.getElementById("regForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevent form from reloading the page
 
-    document.getElementById("quizForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Thank you for your feedback! Stay vigilant.");
+      // Grab form data
+      const email = document.getElementById("userEmail").value;
+      const event = document.getElementById("eventSelect").value;
+
+      // Send email via EmailJS
+      emailjs.send("service_x5ooj3r", "template_ks7tbzn", {
+        user_email: email,
+        event_name: event,
+        //admin_email: "maddbirhan@email.com" // Optional — only if your template uses this
+      })
+      .then(function(response) {
+        alert("✅ Registration successful! You'll receive confirmation soon.");
+        document.getElementById("regForm").reset();
+      }, function(error) {
+        console.error("❌ EmailJS Error:", error);
+        alert("Something went wrong. Please try again later.");
+      });
     });
   </script>
+
 </body>
 </html>
