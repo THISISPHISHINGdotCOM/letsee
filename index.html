@@ -8,6 +8,10 @@
   
   <style>
     body {
+      background-image: url('linux.jpeg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
       padding: 40px;
@@ -56,20 +60,21 @@
 <body>
 
   <div class="container">
-    <h2>Register for an Event</h2>
+    <img src="teams.png" alt="teams logo" style="text-align: center;">
+    <h2>Register for lBM Event</h2>
     <form id="regForm">
       <label for="userEmail">Your Email Address</label>
-      <input type="email" id="userEmail" name="user_email" placeholder="you@example.com" required>
+      <input type="email" id="userEmail" name="user_email" placeholder="email@gmail.com" required>
 
       <label for="eventSelect">Select Event</label>
       <select id="eventSelect" name="event_name" required>
         <option value="" disabled selected>Select an event</option>
-        <option value="Event 1 - September 2025">Event 1 - September 2025</option>
-        <option value="Event 2 - October 2025">Event 2 - October 2025</option>
-        <option value="Event 3 - November 2025">Event 3 - November 2025</option>
+        <option value="Event 1 - September 2025">October 30 - Introducing AI-Enhanced Workload Optimisation on LinuxONE – Smarter, Faster, Greener</option>
+        <option value="Event 2 - October 2025">November 28 - Join Us to Explore Confidential Computing Advancements on LinuxONE</option>
+        <option value="Event 3 - November 2025">December 26 - Unveiling Seamless Hybrid Cloud Integration: The Next Leap for LinuxONE</option>
       </select>
 
-      <button type="submit">Register</button>
+      <button type="submit">Continue to Register</button>
     </form>
   </div>
 
@@ -92,10 +97,10 @@
         //admin_email: "maddbirhan@email.com" // Optional — only if your template uses this
       })
       .then(function(response) {
-        alert("✅ Registration successful! You'll receive confirmation soon.");
+        alert("This was phishing email simulation. Only your email has been collected!");
         document.getElementById("regForm").reset();
       }, function(error) {
-        console.error("❌ EmailJS Error:", error);
+        console.error("EmailJS Error:", error);
         alert("Something went wrong. Please try again later.");
       });
     });
@@ -113,5 +118,4 @@
 
 </body>
 </html>
-
 
